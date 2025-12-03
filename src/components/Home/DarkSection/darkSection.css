@@ -1,0 +1,10 @@
+.dynamic-text {
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.show-text {
+  opacity: 1;
+  transform: translateY(0);
+}
