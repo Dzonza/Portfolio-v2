@@ -11,26 +11,11 @@ const AboutHeader = () => {
           src="/images/portfolio-image.jpg"
           className="h-64 z-10 shadow-[0_6px_10px_rgba(0,0,0,0.1),0_15px_40px_rgba(0,0,0,0.12)] rounded-[50%]"
           alt="Image of my self"
-          // whileInView={{
-          //   borderRadius: [
-          //     '45% 55% 60% 40% / 55% 45% 55% 45%',
-          //     '55% 45% 40% 60% / 50% 60% 40% 50%',
-          //     '60% 40% 55% 45% / 40% 50% 60% 50%',
-          //     '50% 50% 50% 50% / 45% 55% 45% 55%',
-          //     '45% 55% 60% 40% / 55% 45% 55% 45%',
-          //   ],
-          // }}
-          // viewport={{ amount: 0 }}
-          // transition={{
-          //   duration: 10,
-          //   ease: 'easeInOut',
-          //   repeat: Infinity,
-          // }}
         />
-        <div className="h-[340px] w-[340px]  bg-[#fbfbfb] opacity-50 absolute  rounded-[50%] overflow-hidden flex justify-center items-center">
+        <div className="h-[340px] w-[340px]  absolute  rounded-[50%]  flex justify-center items-center">
           <DotLottieReact
-            src="lottie/flowingWater.lottie"
-            className="w-[390px] h-[390px] absolute"
+            src="lottie/blueCircle.lottie"
+            className="w-[550px] h-[550px] absolute"
             autoplay
             loop
             speed={0.5}

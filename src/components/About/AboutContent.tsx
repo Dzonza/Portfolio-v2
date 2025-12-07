@@ -7,13 +7,13 @@ const AboutContent = () => {
       <div className="w-[45%]  relative ">
         <DotLottieReact
           src="lottie/waves.lottie"
-          className="absolute w-40"
+          className="absolute w-56"
           autoplay
           loop
         />
         <DotLottieReact
           src="lottie/triangle.lottie"
-          className="absolute w-40 bottom-0 right-0"
+          className="absolute w-44 bottom-0 right-0"
           loop
           autoplay
         />
