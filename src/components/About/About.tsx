@@ -8,7 +8,7 @@ import VerticalRect from './VerticalRect';
 
 const About = () => {
   return (
-    <SectionContainer title="About">
+    <SectionContainer title="About" titleStyle={false}>
       <div className="bg-[#151419]  w-full rounded-t-[30px] px-16 py-24 flex flex-col gap-16 overflow-hidden">
         <AboutHeader />
         <AboutContent />

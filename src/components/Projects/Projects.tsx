@@ -61,9 +61,26 @@ const grillPopLangImages = [
     title: 'Tailwind',
   },
 ];
+
+const gooFactoryImages = [
+  '/images/gooFactory-home.png',
+  '/images/gooFactory-about.png',
+  '/images/gooFactory-services.png',
+];
+
+const gooFactoryLangImages = [
+  {
+    url: '/images/js-2.png',
+    title: 'JavaScript',
+  },
+  {
+    url: '/images/sass.png',
+    title: 'Sass',
+  },
+];
 const Projects = () => {
   return (
-    <SectionContainer title="Projects">
+    <SectionContainer title="Projects" titleStyle={true}>
       <section className="flex flex-col  gap-5 pt-5">
         <Project
           title="VJN Solutions"
@@ -78,12 +95,17 @@ const Projects = () => {
           languages={infiniteLoopLangImages}
         />
         <Project
-          title="Grill Pop"
+          title="GrillPop"
           logo="/images/grillpop-logo.png"
           images={grillPopData}
           languages={grillPopLangImages}
         />
-        {/* <Project /> */}
+        <Project
+          title="gooFactory"
+          logo="/images/gooFactory-logo.png"
+          images={gooFactoryImages}
+          languages={gooFactoryLangImages}
+        />
       </section>
     </SectionContainer>
   );
