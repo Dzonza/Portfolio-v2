@@ -17,3 +17,6 @@
       url('fonts/Bauhaus\ 93\ Regular.ttf') format('truetype');
   }
 }
+
+@layer utilities {
+}

@@ -5,22 +5,24 @@ interface ContainerData {
   title: string;
   children: React.ReactNode;
   titleStyle: boolean;
+  sectionId: string;
 }
 
 const SectionContainer: FC<ContainerData> = ({
   title,
   children,
   titleStyle,
+  sectionId,
 }) => {
   return (
     <section
-      id="about"
-      className="w-full  px-16 pt-40 flex flex-col gap-[2px]  text-[36px]  max-w-[1600px] m-auto"
+      id={sectionId}
+      className="w-full  px-16 pt-32 flex flex-col gap-[2px]  text-[36px]  max-w-[1600px] m-auto"
     >
       {titleStyle ? (
         <div className="w-[500px] m-[0_auto] relative">
           <img
-            src="/images/projects-test-1.png"
+            src="/images/projects-section.png"
             alt="Projects section image"
             className="w-full"
           />

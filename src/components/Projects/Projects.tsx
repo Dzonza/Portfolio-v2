@@ -80,31 +80,35 @@ const gooFactoryLangImages = [
 ];
 const Projects = () => {
   return (
-    <SectionContainer title="Projects" titleStyle={true}>
+    <SectionContainer title="Projects" titleStyle={true} sectionId="projects">
       <section className="flex flex-col  gap-5 pt-5">
         <Project
           title="VJN Solutions"
           logo="/images/vjn-logo.png"
           images={vjnData}
           languages={vjnLangImages}
+          transferTo="https://vjnsolutions.com/home"
         />
         <Project
           title="Infinite Loop"
           logo="/images/infinite-loop-logo.png"
           images={infiniteLoopData}
           languages={infiniteLoopLangImages}
+          transferTo="https://www.infinite-loop.site/"
         />
         <Project
           title="GrillPop"
           logo="/images/grillpop-logo.png"
           images={grillPopData}
           languages={grillPopLangImages}
+          transferTo="https://grillpop.shop/"
         />
         <Project
           title="gooFactory"
           logo="/images/gooFactory-logo.png"
           images={gooFactoryImages}
           languages={gooFactoryLangImages}
+          transferTo="https://dzonza.github.io/gooFactory/"
         />
       </section>
     </SectionContainer>

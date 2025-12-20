@@ -18,6 +18,7 @@ const NavLink: FC<Links> = ({ whereTo, text }) => {
         to={whereTo}
         smooth={true}
         duration={500}
+        offset={100}
         className="text-[#FBFBFB] cursor-pointer"
       >
         {text}
