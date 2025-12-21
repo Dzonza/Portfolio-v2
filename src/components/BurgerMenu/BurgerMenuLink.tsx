@@ -1,5 +1,6 @@
-import type { FC } from 'react';
+import { useContext, type FC } from 'react';
 import { Link } from 'react-scroll';
+import { NavLinks } from '../store/BurgerMenuNavContext';
 
 interface LindData {
   title: string;
@@ -7,10 +8,13 @@ interface LindData {
 }
 
 const BurgerMenuLink: FC<LindData> = ({ title, to }) => {
+  const { handleClickedBtn } = useContext(NavLinks);
   return (
     <Link
       to={to}
+      offset={to === 'home' ? 0 : 100}
       className="cursor-pointer text-center text-[22px] duration-500 text-[#151419] font-light py-[6px] border px-10 bg-[size:300%] bg-[#fbfbfb] bg-[linear-gradient(135deg,transparent_0%,transparent_50%,#151419_50%)] hover:bg-[position:99%] hover:text-[#fbfbfb]"
+      onClick={handleClickedBtn}
     >
       {title}
     </Link>
