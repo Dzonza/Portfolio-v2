@@ -1,7 +1,28 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { useContext, useEffect, useRef } from 'react';
+import { LetterPosition } from '../store/LetterPositionContext';
 import LangImageContainer from './LangImageContainer';
 
 const AboutContent = () => {
+  const mRef = useRef<HTMLImageElement | null>(null);
+  const nRef = useRef<HTMLImageElement | null>(null);
+
+  const { position, handleSettingPosition } = useContext(LetterPosition);
+
+  useEffect(() => {
+    if (mRef && nRef) {
+      const yPosN = nRef.current?.getBoundingClientRect();
+      const yPosM = mRef.current?.getBoundingClientRect();
+
+      if (yPosM) {
+        handleSettingPosition('m', yPosM.y);
+      }
+      if (yPosN) {
+        handleSettingPosition('n', yPosN.y);
+      }
+    }
+  }, []);
+
   return (
     <section className="flex gap-5">
       <div className="w-[45%]  relative ">
@@ -21,11 +42,13 @@ const AboutContent = () => {
           src="images/subtract-n-letter.png"
           className="absolute right-10 top-10"
           alt="n letter"
+          ref={nRef}
         />
         <img
           src="images/subtract-m-letter.png"
           className="absolute left-[75px] bottom-5"
           alt="m letter"
+          ref={mRef}
         />
       </div>
       <div className="w-[55%] flex flex-col gap-5">
