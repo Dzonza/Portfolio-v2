@@ -11,10 +11,10 @@ const Footer = () => {
   }, []);
 
   const linkData = [
-    { id: 1, title: 'Home', to: 'Home' },
-    { id: 2, title: 'About', to: 'About' },
-    { id: 3, title: 'Projects', to: 'Projects' },
-    { id: 4, title: 'Contact', to: 'Contact' },
+    { id: 1, title: 'Home', to: 'home' },
+    { id: 2, title: 'About', to: 'about' },
+    { id: 3, title: 'Projects', to: 'projects' },
+    { id: 4, title: 'Contact', to: 'contact' },
   ];
   return (
     <section className="w-full bg-[#151419] max-w-[1600px] m-auto  flex justify-center items-center flex-col gap-8 p-12">

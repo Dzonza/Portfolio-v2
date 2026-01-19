@@ -1,35 +1,31 @@
 import { motion } from 'motion/react';
-import { useContext, type FC } from 'react';
+import { useContext } from 'react';
 import { NavLinks } from '../store/BurgerMenuNavContext';
 
-interface letterData {
-  isInView: boolean;
-}
-
-const ContactLetterN: FC<letterData> = ({ isInView }) => {
+const BurgerLetterN = () => {
   const { isClicked } = useContext(NavLinks);
 
   return (
     <>
       <motion.img
-        animate={isInView && !isClicked ? { scale: [1, 0.9, 1] } : { scale: 1 }}
+        animate={isClicked ? { scale: [1, 0.9, 1] } : { scale: 1 }}
         transition={
-          isInView && !isClicked
+          isClicked
             ? { duration: 4, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute left-[10%] lg:left-[20%] top-[32%]"
+        className="absolute left-[20%] top-[32%]"
         src="/images/contact-n-shadow.png"
         alt="n letter dark"
       />
       <motion.img
-        animate={isInView && !isClicked ? { y: [0, -8, 0] } : { y: 0 }}
+        animate={isClicked ? { y: [0, -8, 0] } : { y: 0 }}
         transition={
-          isInView && !isClicked
+          isClicked
             ? { duration: 4, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute left-[11%] lg:left-[21%] top-[28%]"
+        className="absolute left-[21%] top-[28%]"
         src="/images/contact-n-letter.png"
         alt="n letter"
       />
@@ -37,4 +33,4 @@ const ContactLetterN: FC<letterData> = ({ isInView }) => {
   );
 };
 
-export default ContactLetterN;
+export default BurgerLetterN;

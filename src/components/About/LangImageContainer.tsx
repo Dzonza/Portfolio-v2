@@ -6,7 +6,7 @@ interface ImageData {
 }
 
 const LangImageContainer: FC<ImageData> = ({ src, alt }) => {
-  return <img src={src} alt={alt} className="w-14" />;
+  return <img src={src} alt={alt} className="w-[50px]" />;
 };
 
 export default LangImageContainer;

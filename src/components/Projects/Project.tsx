@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
+import useResize from '../../CustomHooks/Resize';
 
 interface LangData {
   url: string;
@@ -25,6 +26,8 @@ const Project: FC<ProjectData> = ({
   languages,
   transferTo,
 }) => {
+  const { width } = useResize();
+
   const [isHovered, setIsHovered] = useState(false);
 
   const x = useMotionValue(0);
@@ -104,7 +107,9 @@ const Project: FC<ProjectData> = ({
           <motion.div
             animate={{
               background: isHovered
-                ? 'linear-gradient(to right, #151419 60%, transparent)'
+                ? width < 1024
+                  ? 'linear-gradient(to right, #151419 40%, transparent)'
+                  : 'linear-gradient(to right, #151419 60%, transparent)'
                 : 'linear-gradient(to right, #151419 80%, transparent)',
             }}
             transition={{ duration: 0.4 }}

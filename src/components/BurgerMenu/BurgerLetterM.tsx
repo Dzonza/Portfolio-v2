@@ -1,19 +1,15 @@
 import { motion } from 'motion/react';
-import { useContext, type FC } from 'react';
+import { useContext } from 'react';
 import { NavLinks } from '../store/BurgerMenuNavContext';
 
-interface letterData {
-  isInView: boolean;
-}
-
-const ContactLetterM: FC<letterData> = ({ isInView }) => {
+const BurgerLetterM = () => {
   const { isClicked } = useContext(NavLinks);
   return (
     <>
       <motion.img
-        animate={isInView && !isClicked ? { scale: [1, 0.9, 1] } : { scale: 1 }}
+        animate={isClicked ? { scale: [1, 0.9, 1] } : { scale: 1 }}
         transition={
-          isInView && !isClicked
+          isClicked
             ? {
                 duration: 4,
                 repeat: Infinity,
@@ -22,14 +18,14 @@ const ContactLetterM: FC<letterData> = ({ isInView }) => {
               }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute bottom-[10%] lg:bottom-[20%] right-[15%] lg:right-[25%]"
+        className="absolute bottom-[20%] right-[25%]"
         src="/images/contact-m-shadow.png"
         alt="n letter dark"
       />
       <motion.img
-        animate={isInView && !isClicked ? { y: [0, -8, 0] } : { y: 0 }}
+        animate={isClicked ? { y: [0, -8, 0] } : { y: 0 }}
         transition={
-          isInView && !isClicked
+          isClicked
             ? {
                 duration: 4,
                 repeat: Infinity,
@@ -38,7 +34,7 @@ const ContactLetterM: FC<letterData> = ({ isInView }) => {
               }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute bottom-[14%] lg:bottom-[24%] right-[15%] lg:right-[25%]"
+        className="absolute bottom-[24%] right-[25%]"
         src="/images/contact-m-letter.png"
         alt="n letter"
       />
@@ -46,4 +42,4 @@ const ContactLetterM: FC<letterData> = ({ isInView }) => {
   );
 };
 
-export default ContactLetterM;
+export default BurgerLetterM;

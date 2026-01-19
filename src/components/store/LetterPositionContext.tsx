@@ -28,25 +28,11 @@ export const LetterPositionProvider: FC<PropsWithChildren> = ({ children }) => {
   });
 
   const handleSettingPosition = useCallback((key: string, value: number) => {
-    console.log(key, value);
-
     setPosition((prevValue) => ({
       ...prevValue,
       [key]: value,
     }));
   }, []);
-
-  //   const setPositionM = useCallback((value: number) => {
-  //     setPosition((prevValue) => ({
-  //       ...prevValue,
-  //       m: value,
-  //     }));
-  //   const setPositionN = useCallback((value: number) => {
-  //     setPosition((prevValue) => ({
-  //       ...prevValue,
-  //       n: value,
-  //     }));
-  //   }, []);
 
   const letterContext: PositionData = {
     position,

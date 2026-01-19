@@ -1,6 +1,8 @@
+import type { DotLottie } from '@lottiefiles/dotlottie-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import type { FC } from 'react';
-
+import { useInView } from 'motion/react';
+import { useCallback, useContext, useEffect, useRef, type FC } from 'react';
+import { NavLinks } from '../components/store/BurgerMenuNavContext';
 interface ContainerData {
   title: string;
   children: React.ReactNode;
@@ -14,10 +16,30 @@ const SectionContainer: FC<ContainerData> = ({
   titleStyle,
   sectionId,
 }) => {
+  const lottieRef = useRef<DotLottie | null>(null);
+  const projectsRef = useRef<HTMLElement | null>(null);
+  const { isClicked } = useContext(NavLinks);
+
+  const handleCubeAnimation = useCallback((lottie: DotLottie | null) => {
+    lottieRef.current = lottie;
+  }, []);
+
+  const isInView = useInView(projectsRef, { amount: 0 });
+
+  useEffect(() => {
+    if (!lottieRef.current || !projectsRef.current) return;
+    if (isInView && !isClicked) {
+      lottieRef.current.play();
+    } else {
+      lottieRef.current.pause();
+    }
+  }, [isClicked, isInView]);
+
   return (
     <section
       id={sectionId}
-      className="w-full  px-16 pt-32 flex flex-col gap-[2px]  text-[36px]  max-w-[1600px] m-auto"
+      className="px-10 lg:px-12 pt-20 lg:pt-32 flex flex-col gap-[2px]  text-[36px]  max-w-[1600px] m-auto"
+      ref={projectsRef}
     >
       {titleStyle ? (
         <div className="w-[500px] m-[0_auto] relative">
@@ -29,8 +51,9 @@ const SectionContainer: FC<ContainerData> = ({
           <DotLottieReact
             src="/lottie/cubeAnimation.lottie"
             className="absolute top-0 w-72 translate-x-[26px] -translate-y-4"
-            autoplay
+            autoplay={!!isInView}
             loop
+            dotLottieRefCallback={handleCubeAnimation}
           />
         </div>
       ) : (

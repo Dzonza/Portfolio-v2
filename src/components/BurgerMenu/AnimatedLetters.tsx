@@ -1,18 +1,31 @@
-import { useContext } from 'react';
-import ContactLetterM from '../Contact/ContactLetterM';
-import ContactLetterN from '../Contact/ContactLetterN';
+import { useContext, useEffect, useState } from 'react';
+import useResize from '../../CustomHooks/Resize';
 import { NavLinks } from '../store/BurgerMenuNavContext';
+import BurgerLetterM from './BurgerLetterM';
+import BurgerLetterN from './BurgerLetterN';
 
 const AnimatedLetters = () => {
   const { isClicked } = useContext(NavLinks);
+  const { width, height } = useResize();
+  const [letterBox, setLetterBox] = useState(0);
+  useEffect(() => {
+    if (width > 1600) {
+      setLetterBox(width - 600);
+    } else {
+      setLetterBox(width - 400);
+    }
+  }, [width]);
   return (
     <div
-      className={`fixed top-1/2 left-[30%] -translate-x-[30%] duration-500 -translate-y-1/2 z-40 h-[500px] w-[700px] ${
+      style={{ width: letterBox, height: height }}
+      className={`fixed flex justify-center items-center duration-500 z-40 ${
         isClicked ? 'visible opacity-100' : 'invisible opacity-0'
       }`}
     >
-      <ContactLetterN />
-      <ContactLetterM />
+      <div className={`fixed h-[500px] w-[700px] `}>
+        <BurgerLetterN />
+        <BurgerLetterM />
+      </div>
     </div>
   );
 };

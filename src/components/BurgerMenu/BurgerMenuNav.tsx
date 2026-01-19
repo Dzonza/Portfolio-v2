@@ -1,5 +1,6 @@
 import { motion, MotionValue } from 'motion/react';
 import { useContext, type FC } from 'react';
+import useResize from '../../CustomHooks/Resize';
 import { NavLinks } from '../store/BurgerMenuNavContext';
 import Github from '../svg/Github';
 import Linkedin from '../svg/Linkedin';
@@ -10,12 +11,13 @@ interface NavData {
 }
 
 const BurgerMenuNav: FC<NavData> = ({ xPos }) => {
+  const { width } = useResize();
   const { isClicked } = useContext(NavLinks);
   return (
     <motion.div
       style={{ x: xPos }}
       className={`fixed top-0 right-0 h-full duration-500 bg-[#fbfbfb] z-20 flex flex-col gap-5 justify-center items-center ${
-        isClicked ? 'w-[400px]' : 'w-0'
+        isClicked ? (width > 1600 ? 'w-[600px]' : 'w-[400px]') : 'w-0'
       }`}
     >
       <nav

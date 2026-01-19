@@ -17,16 +17,22 @@ const LanguageBox: FC<IconLink> = ({
     <div
       className={`p-1   absolute border border-[#151419] rounded-[12px]  duration-300 cursor-pointer   hover:border-black hover:bg-[#151419] ${
         alt === 'React' &&
-        'top-44 left-20 rotate-45 hover:shadow-[5px_5px_0px_#FBFBFB] hover:-translate-y-3'
+        'top-32 left-[25%] lg:top-44 lg:left-20 rotate-[60deg] hover:shadow-[5px_5px_0px_#FBFBFB] hover:-translate-y-3 hover:translate-x-1'
       } ${
         alt === 'Javascript' &&
-        'top-[40%] left-[25%] hover:shadow-[-5px_5px_0px_#FBFBFB] hover:-translate-y-3 hover:translate-x-3'
+        'top-[35%] right-[40%] hover:shadow-[-5px_5px_0px_#FBFBFB] hover:-translate-y-3 hover:translate-x-3'
       } ${
         alt === 'Vue' &&
-        'bottom-1/3 left-[40%] -rotate-45 hover:shadow-[-5px_-5px_0px_#FBFBFB] hover:translate-x-3'
+        'bottom-1/3 right-[20%] -rotate-45 hover:shadow-[-5px_-5px_0px_#FBFBFB] hover:translate-x-3'
       } ${
         alt === 'Tailwind' &&
-        'bottom-[20%] left-[10%] hover:shadow-[-5px_-5px_0px_#FBFBFB] hover:translate-y-3 hover:translate-x-3'
+        'bottom-[5%] left-[30%] hover:shadow-[-5px_-5px_0px_#FBFBFB] hover:translate-y-3 hover:translate-x-3'
+      } ${
+        alt === 'LinkedIn' &&
+        'top-1/2 left-[30%] hover:shadow-[-5px_0px_0px_#FBFBFB]  hover:translate-x-3'
+      } ${
+        alt === 'Github' &&
+        'bottom-[20%] left-[15%] hover:shadow-[-5px_-5px_0px_#FBFBFB] hover:translate-y-3 hover:translate-x-3'
       }`}
       onMouseEnter={() => {
         currentHoveredLang(alt);

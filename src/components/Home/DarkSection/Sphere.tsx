@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 const Sphere = () => {
   return (
-    <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2">
+    <div className="absolute top-0 left-1/2 lg:top-1/2 lg:left-0 -translate-y-1/2 -translate-x-1/2">
       <motion.div
         className="w-48 h-48 rounded-full"
         style={{
@@ -16,11 +16,12 @@ const Sphere = () => {
       `,
           filter: 'blur(0.4px)',
         }}
-        animate={{
+        whileInView={{
           scale: [1.05, 1.15, 1.05],
           opacity: [1, 0.85, 1],
           rotate: [0, 2, 0, -2, 0],
         }}
+        viewport={{ amount: 0 }}
         transition={{
           duration: 4,
           repeat: Infinity,
