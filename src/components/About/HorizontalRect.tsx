@@ -10,7 +10,7 @@ interface RectData {
 const HorizontalRect: FC<RectData> = ({ image, text, color, textColor }) => {
   return (
     <div
-      className=" flex justify-center items-end gap-1 h-[250px] w-[440px] bg-[#151419] rounded-xl p-[85px] mr-7"
+      className=" flex justify-center items-end gap-1 h-[200px] sm:h-[250px] w-[380px] sm:w-[440px] bg-[#151419] rounded-xl p-[70px] sm:p-[85px] mr-4 sm:mr-7"
       style={{ backgroundColor: color ? color : '#151419' }}
     >
       <img src={`images/${image}`} alt="small letter n" />

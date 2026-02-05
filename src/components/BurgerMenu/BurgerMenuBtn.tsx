@@ -11,7 +11,7 @@ const BurgerMenuBtn: FC<BtnData> = ({ xPos }) => {
   return (
     <motion.section
       style={{ x: xPos }}
-      className={`z-40 fixed top-8 right-8   rounded-[12px] w-[65px] h-[65px]  bg-[#fbfbfb]  border-[0.5px] border-[#FF5B04] duration-500  cursor-pointer p-5  ${
+      className={`z-[2000] fixed top-8 right-8   rounded-[12px] w-[65px] h-[65px]  bg-[#fbfbfb]  border-[0.5px] border-[#FF5B04] duration-500  cursor-pointer p-5  ${
         isClicked
           ? 'shadow-[0px_0px_0px_#FF5B04]  border-[#fbfbfb]'
           : 'shadow-[3px_3px_0px_#FF5B04]  '

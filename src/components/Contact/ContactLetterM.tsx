@@ -22,7 +22,7 @@ const ContactLetterM: FC<letterData> = ({ isInView }) => {
               }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute bottom-[10%] lg:bottom-[20%] right-[15%] lg:right-[25%]"
+        className="w-52 xs:w-auto absolute bottom-[4%] xs:bottom-[1%] right-[5%] xs:right-[8%]"
         src="/images/contact-m-shadow.png"
         alt="n letter dark"
       />
@@ -38,7 +38,7 @@ const ContactLetterM: FC<letterData> = ({ isInView }) => {
               }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute bottom-[14%] lg:bottom-[24%] right-[15%] lg:right-[25%]"
+        className="w-52 xs:w-auto absolute bottom-[10%] xs:bottom-[7%] right-[5%] xs:right-[8%]"
         src="/images/contact-m-letter.png"
         alt="n letter"
       />

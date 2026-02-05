@@ -1,6 +1,7 @@
 import { useInView } from 'motion/react';
 import { useContext, useRef } from 'react';
 import Marquee from 'react-fast-marquee';
+import useResize from '../../CustomHooks/Resize';
 import SectionContainer from '../../ReusableComponents/SectionContainer';
 import { NavLinks } from '../store/BurgerMenuNavContext';
 import AboutContent from './AboutContent';
@@ -11,13 +12,13 @@ import VerticalRect from './VerticalRect';
 
 const About = () => {
   const marqueContainerRef = useRef<HTMLDivElement | null>(null);
-
+  const { width } = useResize();
   const isInView = useInView(marqueContainerRef, { amount: 0 });
   const { isClicked } = useContext(NavLinks);
 
   return (
     <SectionContainer title="About" titleStyle={false} sectionId="about">
-      <div className="bg-[#151419]  w-full rounded-t-[30px] px-16 pt-24 pb-12 lg:pb-24 flex flex-col gap-12 lg:gap-16 overflow-hidden">
+      <div className="bg-[#151419]  w-full rounded-none s:rounded-t-[30px] px-4 s:px-8 sm:px-16 pt-24 pb-20 s:pb-12 lg:pb-24 flex flex-col gap-5 s:gap-8 md:gap-12 lg:gap-16 overflow-hidden">
         <AboutHeader />
         <AboutContent />
       </div>
@@ -39,7 +40,7 @@ const About = () => {
             <Square text="Reliable & Communicative" />
           </Marquee>
         </div>
-        <div className="py-5 bg-[#151419] flex flex-col gap-20 lg:gap-32 rounded-b-[30px]">
+        <div className="pt-5 pb-0 m:py-5  bg-[#151419] flex flex-col gap-20 xs:gap-24 m:gap-12 md:gap-20 lg:gap-32 rounded-none m:rounded-b-[30px]">
           <Marquee
             gradient
             gradientColor="#151419"
@@ -71,8 +72,8 @@ const About = () => {
               textColor="#151419"
             />
           </Marquee>
-          <p className="font-[bauhaus] text-[#fbfbfb] leading-[1.2] text-[90px] text-center">
-            Lets build something together
+          <p className=" relative font-[bauhaus] text-[#fbfbfb] s:leading-normal  m:leading-[1.2]  text-[38px] xs:text-[45px] m:text-[60px] sm:text-[70px] md:text-[90px] text-center">
+            Lets build something {width <= 560 ? '' : 'together'}
           </p>
         </div>
       </div>

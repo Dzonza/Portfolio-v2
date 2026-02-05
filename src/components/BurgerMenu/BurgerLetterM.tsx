@@ -5,7 +5,7 @@ import { NavLinks } from '../store/BurgerMenuNavContext';
 const BurgerLetterM = () => {
   const { isClicked } = useContext(NavLinks);
   return (
-    <>
+    <section className="z-[800] absolute bottom-0 right-0 w-full h-full translate-x-[60%] translate-y-[70%]">
       <motion.img
         animate={isClicked ? { scale: [1, 0.9, 1] } : { scale: 1 }}
         transition={
@@ -18,7 +18,7 @@ const BurgerLetterM = () => {
               }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute bottom-[20%] right-[25%]"
+        className="absolute w-[200px] m:w-[400px] bottom-0 right-0 "
         src="/images/contact-m-shadow.png"
         alt="n letter dark"
       />
@@ -34,11 +34,11 @@ const BurgerLetterM = () => {
               }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute bottom-[24%] right-[25%]"
+        className="absolute w-[200px]  m:w-[400px] bottom-[4%] right-0"
         src="/images/contact-m-letter.png"
         alt="n letter"
       />
-    </>
+    </section>
   );
 };
 

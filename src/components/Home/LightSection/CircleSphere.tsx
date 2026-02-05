@@ -1,12 +1,23 @@
 import { motion } from 'motion/react';
+import { useEffect, useState } from 'react';
+import useResize from '../../../CustomHooks/Resize';
 
 const CircleSphere = () => {
   const rings = 12;
+  const { width } = useResize();
+  const [circleSize, setCircleSize] = useState(0);
+  useEffect(() => {
+    if (width < 380) {
+      setCircleSize(156);
+    } else {
+      setCircleSize(200);
+    }
+  }, [width]);
 
   return (
-    <div className="absolute bottom-0 right-1/2  lg:top-1/2 lg:right-0 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center">
+    <div className=" absolute bottom-0 right-1/2  lg:top-1/2 lg:right-0 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center">
       {Array.from({ length: rings }).map((_, i) => {
-        const size = 200 - i * 10;
+        const size = circleSize - i * 10;
         const delay = i * 0.15;
 
         return (

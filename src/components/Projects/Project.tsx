@@ -1,5 +1,11 @@
-import { animate, motion, useMotionValue, useTransform } from 'motion/react';
-import { useState, type FC } from 'react';
+import {
+  animate,
+  motion,
+  useInView,
+  useMotionValue,
+  useTransform,
+} from 'motion/react';
+import { useCallback, useEffect, useRef, useState, type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -26,26 +32,57 @@ const Project: FC<ProjectData> = ({
   languages,
   transferTo,
 }) => {
+  const projectRef = useRef<HTMLParagraphElement | null>(null);
   const { width } = useResize();
-
   const [isHovered, setIsHovered] = useState(false);
+  const [flag, setFlag] = useState(false);
+  const isInView = useInView(projectRef, {
+    amount: 0.01,
+    margin: '-60% 0px -30% 0px',
+  });
+  const x = useMotionValue(600);
+  const y = useMotionValue(50);
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  useEffect(() => {
+    if (width <= 1024) {
+      x.set(0);
+      if (isInView) {
+        setIsHovered(true);
+      } else {
+        setIsHovered(false);
+      }
+    }
+  }, [isInView, width, x]);
 
   const smoothX = useTransform(x, (v) => v);
   const smoothY = useTransform(y, (v) => v);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
 
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    animate(x, mouseX, { duration: 0.2 });
-    animate(y, mouseY, { duration: 0.2 });
-  };
-
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      if (flag) {
+        x.set(mouseX);
+        setFlag(false);
+      }
+      animate(x, mouseX, { duration: 0.3, ease: 'easeOut' });
+      animate(y, mouseY, { duration: 0.3, ease: 'easeOut' });
+    },
+    [flag, x, y],
+  );
+  const handleMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      setIsHovered(false);
+      const rect = e.currentTarget.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      animate(x, mouseX, { duration: 0.2, ease: 'easeOut' });
+      animate(y, mouseY, { duration: 0.2, ease: 'easeOut' });
+    },
+    [x, y],
+  );
   return (
     <Link to={transferTo} target="_blank">
       <div className="relative w-full">
@@ -55,12 +92,12 @@ const Project: FC<ProjectData> = ({
             opacity: isHovered ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className="p-3 absolute w-[350px] h-[250px] shadow-[0_15px_45px_rgba(0,0,0,0.25)] bg-[#fbfbfb] z-20 pointer-events-none rounded-t-[5px] rounded-es-[5px]"
+          className="p-1 xs:p-2  absolute w-[320px] h-[220px] xs:w-[350px] xs:h-[250px] shadow-[0_15px_45px_rgba(0,0,0,0.25)] bg-[#fbfbfb] z-50 pointer-events-none rounded-t-[5px] rounded-es-[5px]"
           style={{
             x: smoothX,
             y: smoothY,
-            translateX: '-40%',
-            translateY: '-110%',
+            translateX: width <= 1024 ? '0' : '-35%',
+            translateY: width <= 1024 ? '-120%' : '-110%',
             transformOrigin: 'center',
           }}
         >
@@ -70,7 +107,7 @@ const Project: FC<ProjectData> = ({
                 spaceBetween={50}
                 slidesPerView={'auto'}
                 autoplay={{
-                  delay: 2500,
+                  delay: 1500,
                 }}
                 loop={true}
                 className="w-full h-full rounded-t-[5px]"
@@ -93,16 +130,25 @@ const Project: FC<ProjectData> = ({
         </motion.div>
         <motion.article
           initial={{ width: '100%' }}
-          whileHover={{ width: '90%', margin: '0 auto' }}
+          whileHover={
+            width > 1024
+              ? { width: '90%', margin: '0 auto' }
+              : { width: '100%', margin: '0 auto' }
+          }
           transition={{ duration: 0.3 }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={() => {
-            setIsHovered(false);
-            animate(x, 600, { duration: 0.3 });
-            animate(y, 50, { duration: 0.3 });
+          onMouseEnter={() => {
+            if (width > 1024) {
+              setIsHovered(true);
+              setFlag(true);
+            }
           }}
-          className="w-full flex justify-between h-24 items-center overflow-hidden  rounded-[5px] cursor-pointer relative"
+          onMouseMove={(e) => width > 1024 && handleMouseMove(e)}
+          onMouseLeave={(e) => {
+            if (width > 1024) {
+              handleMouseLeave(e);
+            }
+          }}
+          className="w-full flex justify-between h-24 items-center overflow-hidden  rounded-none m:rounded-[5px] cursor-pointer relative"
         >
           <motion.div
             animate={{
@@ -115,9 +161,14 @@ const Project: FC<ProjectData> = ({
             transition={{ duration: 0.4 }}
             className="absolute w-full h-full z-10"
           ></motion.div>
-          <p className="text-[#fbfbfb] pl-8 text-[25px] z-10">{title}</p>
+          <p
+            className="text-[#fbfbfb] pl-5 s:pl-8 text-[20px] s:text-[25px] z-10"
+            ref={projectRef}
+          >
+            {title}
+          </p>
           <motion.img
-            className={` h-full object-cover duration-300 ${
+            className={` w-1/2 md:w-auto md:h-full object-cover duration-300 ${
               isHovered ? 'scale-100' : 'scale-150'
             } `}
             src={logo}

@@ -18,7 +18,7 @@ const Footer = () => {
   ];
   return (
     <section className="w-full bg-[#151419] max-w-[1600px] m-auto  flex justify-center items-center flex-col gap-8 p-12">
-      <nav className="flex gap-8">
+      <nav className="grid grid-cols-2 justify-items-center xxs:flex-row xxs:flex gap-x-10 gap-y-5 xxs:gap-8 ">
         {linkData.map((elem) => {
           return (
             <FooterNavLink
@@ -42,7 +42,7 @@ const Footer = () => {
           <Linkedin black={false} />
         </a>
       </div>
-      <p className="text-[#fbfbfb] text-[16px] font-extralight">
+      <p className="text-[#fbfbfb] text-[16px] font-extralight text-center">
         &copy; {handleDate}. All rights are reserved
       </p>
     </section>

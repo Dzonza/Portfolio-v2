@@ -8,6 +8,13 @@ export default {
       fontFamily: {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        xxs: '345px',
+        xs: '380px',
+        ss: '420px',
+        s: '480px',
+        m: '560px',
+      },
     },
   },
   plugins: [],

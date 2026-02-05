@@ -1,3 +1,4 @@
+import useResize from '../../CustomHooks/Resize';
 import SectionContainer from '../../ReusableComponents/SectionContainer';
 import Project from './Project';
 
@@ -79,9 +80,16 @@ const gooFactoryLangImages = [
   },
 ];
 const Projects = () => {
+  const { width } = useResize();
+
   return (
     <SectionContainer title="Projects" titleStyle={true} sectionId="projects">
-      <section className="flex flex-col  gap-5 pt-5">
+      {width <= 560 && (
+        <p className=" text-[#151419] font-[bauhaus]  text-[40px] xs:text-[45px] leading-[1.2] absolute top-0 left-1/2 -translate-x-1/2 ">
+          together
+        </p>
+      )}
+      <section className="flex flex-col  gap-5 ">
         <Project
           title="VJN Solutions"
           logo="/images/vjn-logo.png"

@@ -4,7 +4,7 @@ const Sphere = () => {
   return (
     <div className="absolute top-0 left-1/2 lg:top-1/2 lg:left-0 -translate-y-1/2 -translate-x-1/2">
       <motion.div
-        className="w-48 h-48 rounded-full"
+        className="w-[150px] h-[150px] xs:w-48 xs:h-48 rounded-full"
         style={{
           background: `
         radial-gradient(circle at 30% 30%, #ffffff88, #a855f7 30%, #4c1d95 60%, #1a0b2e)

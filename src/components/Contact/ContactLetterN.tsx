@@ -18,7 +18,7 @@ const ContactLetterN: FC<letterData> = ({ isInView }) => {
             ? { duration: 4, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute left-[10%] lg:left-[20%] top-[32%]"
+        className="w-52 xs:w-auto absolute top-[4%] xs:top-0 left-0 xs:left-[5%] "
         src="/images/contact-n-shadow.png"
         alt="n letter dark"
       />
@@ -29,7 +29,7 @@ const ContactLetterN: FC<letterData> = ({ isInView }) => {
             ? { duration: 4, repeat: Infinity, ease: 'easeInOut' }
             : { duration: 0.4, ease: 'easeOut' }
         }
-        className="absolute left-[11%] lg:left-[21%] top-[28%]"
+        className="w-52 xs:w-auto absolute left-[2%] xs:left-[7%] -top-[3%] xs:-top-[7%] "
         src="/images/contact-n-letter.png"
         alt="n letter"
       />
