@@ -42,6 +42,7 @@ const Initials = () => {
       moveRightMref.current = 0;
     }
   }, [width]);
+  console.log(position.m, position.n);
 
   const rawMoveDownN = useTransform(
     scrollY,

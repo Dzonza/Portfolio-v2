@@ -24,24 +24,41 @@ const AboutContent = () => {
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();
-  const handleImageLoading = useCallback(() => {
-    if (mRef.current && nRef.current) {
-      const yPosN = nRef.current?.getBoundingClientRect();
-      const yPosM = mRef.current?.getBoundingClientRect();
 
-      if (yPosM) {
-        handleSettingPosition('m', yPosM.y);
-      }
-      if (yPosN) {
-        handleSettingPosition('n', yPosN.y);
-      }
-      handleIsLoaded();
-    }
-  }, [handleIsLoaded, handleSettingPosition]);
+  const [loadedImages, setLoadedImages] = useState(0);
+
+  const handleImageLoading = useCallback(() => {
+    setLoadedImages((prev) => prev + 1);
+  }, []);
+
+  // const handleImageLoading = useCallback(() => {
+  //   if (mRef.current && nRef.current) {
+  //     const yPosN = nRef.current?.getBoundingClientRect();
+  //     const yPosM = mRef.current?.getBoundingClientRect();
+
+  //     if (yPosM) {
+  //       handleSettingPosition('m', yPosM.y);
+  //     }
+  //     if (yPosN) {
+  //       handleSettingPosition('n', yPosN.y);
+  //     }
+  //     handleIsLoaded();
+  //   }
+  // }, [handleIsLoaded, handleSettingPosition]);
 
   useEffect(() => {
-    handleImageLoading();
-  }, [handleImageLoading]);
+    if (loadedImages === 2 && mRef.current && nRef.current) {
+      const yPosN = nRef.current.getBoundingClientRect();
+      const yPosM = mRef.current.getBoundingClientRect();
+
+      handleSettingPosition('m', yPosM.y);
+      handleSettingPosition('n', yPosN.y);
+      handleIsLoaded();
+    }
+  }, [loadedImages, handleIsLoaded, handleSettingPosition]);
+  // useEffect(() => {
+  //   handleImageLoading();
+  // }, [handleImageLoading]);
 
   const handleLottieWaves = useCallback(
     (lottie: DotLottie | null) => {
