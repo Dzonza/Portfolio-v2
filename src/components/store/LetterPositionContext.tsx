@@ -13,17 +13,12 @@ interface LetterData {
 
 type PositionData = {
   position: LetterData;
-  handleSettingPosition: (key: string, value: number) => void;
+  handleSettingPosition: (key: keyof LetterData, value: number) => void;
   isLoaded: boolean;
   handleIsLoaded: () => void;
 };
 
-export const LetterPosition = createContext({
-  position: { m: 0, n: 0 },
-  handleSettingPosition: (key: string, value: number) => {},
-  handleIsLoaded: () => {},
-  isLoaded: false,
-});
+export const LetterPosition = createContext<PositionData | null>(null);
 
 export const LetterPositionProvider: FC<PropsWithChildren> = ({ children }) => {
   const [position, setPosition] = useState({

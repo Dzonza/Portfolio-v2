@@ -4,8 +4,8 @@ import { motion, useInView } from 'motion/react';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Marquee from 'react-fast-marquee';
 import useResize from '../../CustomHooks/Resize';
+import { useLetterPosition } from '../../CustomHooks/UseLetterPoisition';
 import { NavLinks } from '../store/BurgerMenuNavContext';
-import { LetterPosition } from '../store/LetterPositionContext';
 import AboutImagesContainer from './AboutImagesContainer';
 import LangImageContainer from './LangImageContainer';
 const AboutContent = () => {
@@ -20,7 +20,7 @@ const AboutContent = () => {
   const wavesRef = useRef<DotLottie | null>(null);
   const tirangleRef = useRef<DotLottie | null>(null);
   const isInView = useInView(aboutContectRef, { amount: 0, initial: false });
-  const { handleSettingPosition, handleIsLoaded } = useContext(LetterPosition);
+  const { handleSettingPosition, handleIsLoaded } = useLetterPosition();
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();

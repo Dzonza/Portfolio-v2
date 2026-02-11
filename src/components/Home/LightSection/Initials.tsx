@@ -1,11 +1,11 @@
 import { motion, useScroll, useSpring, useTransform } from 'motion/react';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useResize from '../../../CustomHooks/Resize';
-import { LetterPosition } from '../../store/LetterPositionContext';
+import { useLetterPosition } from '../../../CustomHooks/UseLetterPoisition';
 
 const Initials = () => {
   const { scrollY } = useScroll();
-  const { position } = useContext(LetterPosition);
+  const { position } = useLetterPosition();
   const { width } = useResize();
   const [currentPosLetters, setCurrentPosLetters] = useState({ n: 0, m: 0 });
   const letterM = useRef<number>(80);
@@ -42,8 +42,6 @@ const Initials = () => {
       moveRightMref.current = 0;
     }
   }, [width]);
-
-  console.log(position.m, currentPosLetters.m, letterM.current);
 
   const rawMoveDownN = useTransform(
     scrollY,
