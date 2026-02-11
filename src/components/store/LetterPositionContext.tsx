@@ -20,6 +20,7 @@ type PositionData = {
 
 export const LetterPosition = createContext({
   position: { m: 0, n: 0 },
+  handleSettingPosition: (key: string, value: number) => {},
   handleIsLoaded: () => {},
   isLoaded: false,
 });
