@@ -1,9 +1,10 @@
 import type { DotLottie } from '@lottiefiles/dotlottie-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useInView } from 'motion/react';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
 import useResize from '../../../CustomHooks/Resize';
+import { LetterPosition } from '../../store/LetterPositionContext';
 import CircleSphere from './CircleSphere';
 import DifferentShapes from './DifferentShapes';
 import Initials from './Initials';
@@ -13,6 +14,7 @@ const LightSection = () => {
   const inViewRef = useRef<HTMLElement | null>(null);
   const lottieRef = useRef<DotLottie | null>(null);
   const isInView = useInView(inViewRef, { amount: 0, initial: true });
+  const { isLoaded } = useContext(LetterPosition);
   const { width } = useResize();
 
   const handleLottieAnimation = useCallback((lottie: DotLottie | null) => {
@@ -34,7 +36,7 @@ const LightSection = () => {
       ref={inViewRef}
     >
       <DifferentShapes />
-      <Initials />
+      {isLoaded && <Initials />}
       <MainText />
       <CircleSphere />
       <Link

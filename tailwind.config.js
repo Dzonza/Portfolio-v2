@@ -14,6 +14,8 @@ export default {
         ss: '420px',
         s: '480px',
         m: '560px',
+        lg: '1025px',
+        md: '770px',
       },
     },
   },

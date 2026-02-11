@@ -43,6 +43,8 @@ const Initials = () => {
     }
   }, [width]);
 
+  console.log(position.m, currentPosLetters.m, letterM.current);
+
   const rawMoveDownN = useTransform(
     scrollY,
     [0, position.n - currentPosLetters.n - letterN.current],

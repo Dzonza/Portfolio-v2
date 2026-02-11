@@ -20,11 +20,11 @@ const AboutContent = () => {
   const wavesRef = useRef<DotLottie | null>(null);
   const tirangleRef = useRef<DotLottie | null>(null);
   const isInView = useInView(aboutContectRef, { amount: 0, initial: false });
-  const { handleSettingPosition } = useContext(LetterPosition);
+  const { handleSettingPosition, handleIsLoaded } = useContext(LetterPosition);
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();
-  useEffect(() => {
+  const handleImageLoading = useCallback(() => {
     if (mRef.current && nRef.current) {
       const yPosN = nRef.current?.getBoundingClientRect();
       const yPosM = mRef.current?.getBoundingClientRect();
@@ -35,8 +35,13 @@ const AboutContent = () => {
       if (yPosN) {
         handleSettingPosition('n', yPosN.y);
       }
+      handleIsLoaded();
     }
-  }, [handleSettingPosition]);
+  }, [handleIsLoaded, handleSettingPosition]);
+
+  useEffect(() => {
+    handleImageLoading();
+  }, [handleImageLoading]);
 
   const handleLottieWaves = useCallback(
     (lottie: DotLottie | null) => {
@@ -92,12 +97,14 @@ const AboutContent = () => {
           className=" w-56 xs:w-auto absolute right-12 s:right-2 sm:right-8 md:right-10  top-10 m:top-2 sm:top-5 md:top-10"
           alt="n letter"
           ref={nRef}
+          onLoad={handleImageLoading}
         />
         <img
           src="images/subtract-m-letter.png"
           className=" w-60 xs:w-auto absolute left-[60px] md:left-[75px] -rotate-2 -bottom-8 sm:bottom-0 md:bottom-5"
           alt="m letter"
           ref={mRef}
+          onLoad={handleImageLoading}
         />
       </div>
       <div

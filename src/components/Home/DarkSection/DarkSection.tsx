@@ -34,7 +34,7 @@ const DarkSection = () => {
       className="w-full lg:w-1/2 bg-[#151419] rounded-none s:rounded-[30px] overflow-hidden relative lg:py-5 lg:pr-5 h-[700px] lg:h-[1024px]"
       ref={darkSectionRef}
     >
-      {width > 1023 && <Navigation />}
+      {width > 1025 && <Navigation />}
       <PulsingCircles isInView={isInView} />
       <StaticImages isInView={isInView} isHovered={isHoveredIcon} />
       <LanguageBox
