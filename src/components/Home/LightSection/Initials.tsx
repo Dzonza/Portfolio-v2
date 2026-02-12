@@ -7,6 +7,7 @@ const Initials = () => {
   const { scrollY } = useScroll();
   const { landingMref, landingNref } = useLetterPosition();
   const { width } = useResize();
+  const [ready, setReady] = useState(false);
   const [currentPosLetters, setCurrentPosLetters] = useState({
     fallingN: 0,
     fallingM: 0,
@@ -45,6 +46,7 @@ const Initials = () => {
         landingN,
         landingM,
       });
+      setReady(true);
       if (width > 1024) {
         letterM.current = 25;
         letterN.current = 40;
@@ -67,7 +69,12 @@ const Initials = () => {
       }
     };
 
-    requestAnimationFrame(() => measure());
+    const init = async () => {
+      await document.fonts.ready;
+      requestAnimationFrame(measure);
+    };
+
+    init();
 
     window.addEventListener('resize', measure);
 
@@ -78,21 +85,29 @@ const Initials = () => {
     scrollY,
     [
       0,
-      currentPosLetters.landingN - currentPosLetters.fallingN - letterN.current,
+      ready
+        ? currentPosLetters.landingN -
+          currentPosLetters.fallingN -
+          letterN.current
+        : 1,
     ],
     [
       0,
-      currentPosLetters.landingN - currentPosLetters.fallingN - letterN.current,
+      ready
+        ? currentPosLetters.landingN -
+          currentPosLetters.fallingN -
+          letterN.current
+        : 0,
     ],
   );
   const rawRotateN = useTransform(
     scrollY,
-    [0, currentPosLetters.landingN - currentPosLetters.fallingN],
+    [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 1],
     ['0', `${rotateNref.current}deg`],
   );
   const rawMoveRightN = useTransform(
     scrollY,
-    [0, currentPosLetters.landingN - currentPosLetters.fallingN],
+    [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 1],
     [0, 20],
   );
 
@@ -111,21 +126,29 @@ const Initials = () => {
     scrollY,
     [
       0,
-      currentPosLetters.landingM - currentPosLetters.fallingM - letterM.current,
+      ready
+        ? currentPosLetters.landingM -
+          currentPosLetters.fallingM -
+          letterM.current
+        : 1,
     ],
     [
       0,
-      currentPosLetters.landingM - currentPosLetters.fallingM - letterM.current,
+      ready
+        ? currentPosLetters.landingM -
+          currentPosLetters.fallingM -
+          letterM.current
+        : 0,
     ],
   );
   const rawRotateM = useTransform(
     scrollY,
-    [0, currentPosLetters.landingM - currentPosLetters.fallingM],
+    [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 1],
     ['0', '385deg'],
   );
   const rawMoveRightM = useTransform(
     scrollY,
-    [0, currentPosLetters.landingM - currentPosLetters.fallingM],
+    [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 1],
     [0, moveRightMref.current],
   );
 
