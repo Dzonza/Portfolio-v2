@@ -1,16 +1,22 @@
 import type { DotLottie } from '@lottiefiles/dotlottie-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion, useInView } from 'motion/react';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  type FC,
+} from 'react';
 import Marquee from 'react-fast-marquee';
 import useResize from '../../CustomHooks/Resize';
 import { useLetterPosition } from '../../CustomHooks/UseLetterPoisition';
 import { NavLinks } from '../store/BurgerMenuNavContext';
 import AboutImagesContainer from './AboutImagesContainer';
 import LangImageContainer from './LangImageContainer';
-const AboutContent = () => {
-  const mRef = useRef<HTMLImageElement | null>(null);
-  const nRef = useRef<HTMLImageElement | null>(null);
+
+const AboutContent: FC = () => {
   const aboutContectRef = useRef<HTMLElement | null>(null);
   const langContainerRef = useRef<HTMLDivElement | null>(null);
   const langInView = useInView(langContainerRef, {
@@ -20,45 +26,10 @@ const AboutContent = () => {
   const wavesRef = useRef<DotLottie | null>(null);
   const tirangleRef = useRef<DotLottie | null>(null);
   const isInView = useInView(aboutContectRef, { amount: 0, initial: false });
-  const { handleSettingPosition, handleIsLoaded } = useLetterPosition();
+  const { landingMref, landingNref } = useLetterPosition();
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();
-
-  const [loadedImages, setLoadedImages] = useState(0);
-
-  const handleImageLoading = useCallback(() => {
-    setLoadedImages((prev) => prev + 1);
-  }, []);
-
-  // const handleImageLoading = useCallback(() => {
-  //   if (mRef.current && nRef.current) {
-  //     const yPosN = nRef.current?.getBoundingClientRect();
-  //     const yPosM = mRef.current?.getBoundingClientRect();
-
-  //     if (yPosM) {
-  //       handleSettingPosition('m', yPosM.y);
-  //     }
-  //     if (yPosN) {
-  //       handleSettingPosition('n', yPosN.y);
-  //     }
-  //     handleIsLoaded();
-  //   }
-  // }, [handleIsLoaded, handleSettingPosition]);
-
-  useEffect(() => {
-    if (loadedImages === 2 && mRef.current && nRef.current) {
-      const yPosN = nRef.current.getBoundingClientRect();
-      const yPosM = mRef.current.getBoundingClientRect();
-
-      handleSettingPosition('m', yPosM.y);
-      handleSettingPosition('n', yPosN.y);
-      handleIsLoaded();
-    }
-  }, [loadedImages, handleIsLoaded, handleSettingPosition]);
-  // useEffect(() => {
-  //   handleImageLoading();
-  // }, [handleImageLoading]);
 
   const handleLottieWaves = useCallback(
     (lottie: DotLottie | null) => {
@@ -113,15 +84,13 @@ const AboutContent = () => {
           src="images/subtract-n-letter.png"
           className=" w-56 xs:w-auto absolute right-12 s:right-2 sm:right-8 md:right-10  top-10 m:top-2 sm:top-5 md:top-10"
           alt="n letter"
-          ref={nRef}
-          onLoad={handleImageLoading}
+          ref={landingNref}
         />
         <img
           src="images/subtract-m-letter.png"
           className=" w-60 xs:w-auto absolute left-[60px] md:left-[75px] -rotate-2 -bottom-8 sm:bottom-0 md:bottom-5"
           alt="m letter"
-          ref={mRef}
-          onLoad={handleImageLoading}
+          ref={landingMref}
         />
       </div>
       <div
