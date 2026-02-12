@@ -14,8 +14,8 @@ const Initials = () => {
     landingN: 0,
     landingM: 0,
   });
-  // const letterM = useRef<number>(80);
-  // const letterN = useRef<number>(80);
+  const letterM = useRef<number>(80);
+  const letterN = useRef<number>(80);
   const mRefLetter = useRef<HTMLImageElement | null>(null);
   const nRefLetter = useRef<HTMLImageElement | null>(null);
   const rotateNref = useRef<number>(174);
@@ -47,30 +47,43 @@ const Initials = () => {
         landingM,
       });
       setReady(true);
-      // if (width > 1024) {
-      //   letterM.current = 25;
-      //   letterN.current = 40;
-      // }
+      if (width > 1024) {
+        letterM.current = 25;
+        letterN.current = 40;
+      }
 
-      // if (width <= 1024) {
-      //   letterM.current = 30;
-      //   letterN.current = 40;
-      // }
-      // if (width <= 768) {
-      //   letterM.current = 30;
-      //   letterN.current = 30;
-      // }
+      if (width <= 1024) {
+        letterM.current = 30;
+        letterN.current = 40;
+      }
+      if (width <= 768) {
+        letterM.current = 30;
+        letterN.current = 30;
+      }
 
-      // if (width <= 480) {
-      //   rotateNref.current = 260;
-      //   letterM.current = -20;
-      //   letterN.current = -40;
-      //   moveRightMref.current = 0;
-      // }
+      if (width <= 480) {
+        rotateNref.current = 260;
+        letterM.current = -20;
+        letterN.current = -40;
+        moveRightMref.current = 0;
+      }
     };
 
     const init = async () => {
       await document.fonts.ready;
+
+      // 2️⃣ Wait for images (letters)
+      const images = [mRefLetter.current, nRefLetter.current].filter(Boolean);
+      await Promise.all(
+        images.map(
+          (img) =>
+            new Promise<void>((resolve) => {
+              if (!img) return resolve();
+              if (img.complete) return resolve();
+              img.onload = () => resolve();
+            }),
+        ),
+      );
       requestAnimationFrame(measure);
     };
 
@@ -81,11 +94,13 @@ const Initials = () => {
     return () => window.removeEventListener('resize', measure);
   }, [width, landingMref, landingNref]);
 
-  const rawMoveDownN = useTransform(
-    scrollY,
-    [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 1],
-    [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 0],
-  );
+  const distanceN = ready
+    ? currentPosLetters.landingN - currentPosLetters.fallingN - letterN.current
+    : 0.01;
+  const distanceM = ready
+    ? currentPosLetters.landingM - currentPosLetters.fallingM - letterM.current
+    : 0.01;
+  const rawMoveDownN = useTransform(scrollY, [0, distanceN], [0, distanceN]);
   const rawRotateN = useTransform(
     scrollY,
     [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 1],
@@ -108,11 +123,7 @@ const Initials = () => {
     mass: 0.1,
     stiffness: 200,
   });
-  const rawMoveDownM = useTransform(
-    scrollY,
-    [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 1],
-    [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 0],
-  );
+  const rawMoveDownM = useTransform(scrollY, [0, distanceM], [0, distanceM]);
   const rawRotateM = useTransform(
     scrollY,
     [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 1],
