@@ -31,14 +31,10 @@ const Initials = () => {
       )
         return;
 
-      const fallingN =
-        nRefLetter.current.getBoundingClientRect().top + window.scrollY;
-      const fallingM =
-        mRefLetter.current.getBoundingClientRect().top + window.scrollY;
-      const landingN =
-        landingNref.current.getBoundingClientRect().top + window.scrollY;
-      const landingM =
-        landingMref.current.getBoundingClientRect().top + window.scrollY;
+      const fallingN = nRefLetter.current.getBoundingClientRect().top;
+      const fallingM = mRefLetter.current.getBoundingClientRect().top;
+      const landingN = landingNref.current.getBoundingClientRect().top;
+      const landingM = landingMref.current.getBoundingClientRect().top;
 
       setCurrentPosLetters({
         fallingN,
