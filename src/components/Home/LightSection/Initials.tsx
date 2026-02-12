@@ -14,8 +14,8 @@ const Initials = () => {
     landingN: 0,
     landingM: 0,
   });
-  const letterM = useRef<number>(80);
-  const letterN = useRef<number>(80);
+  // const letterM = useRef<number>(80);
+  // const letterN = useRef<number>(80);
   const mRefLetter = useRef<HTMLImageElement | null>(null);
   const nRefLetter = useRef<HTMLImageElement | null>(null);
   const rotateNref = useRef<number>(174);
@@ -31,10 +31,14 @@ const Initials = () => {
       )
         return;
 
-      const fallingN = nRefLetter.current.getBoundingClientRect().top;
-      const fallingM = mRefLetter.current.getBoundingClientRect().top;
-      const landingN = landingNref.current.getBoundingClientRect().top;
-      const landingM = landingMref.current.getBoundingClientRect().top;
+      const fallingN =
+        nRefLetter.current.getBoundingClientRect().top + window.scrollY;
+      const fallingM =
+        mRefLetter.current.getBoundingClientRect().top + window.scrollY;
+      const landingN =
+        landingNref.current.getBoundingClientRect().top + window.scrollY;
+      const landingM =
+        landingMref.current.getBoundingClientRect().top + window.scrollY;
 
       setCurrentPosLetters({
         fallingN,
@@ -43,26 +47,26 @@ const Initials = () => {
         landingM,
       });
       setReady(true);
-      if (width > 1024) {
-        letterM.current = 25;
-        letterN.current = 40;
-      }
+      // if (width > 1024) {
+      //   letterM.current = 25;
+      //   letterN.current = 40;
+      // }
 
-      if (width <= 1024) {
-        letterM.current = 30;
-        letterN.current = 40;
-      }
-      if (width <= 768) {
-        letterM.current = 30;
-        letterN.current = 30;
-      }
+      // if (width <= 1024) {
+      //   letterM.current = 30;
+      //   letterN.current = 40;
+      // }
+      // if (width <= 768) {
+      //   letterM.current = 30;
+      //   letterN.current = 30;
+      // }
 
-      if (width <= 480) {
-        rotateNref.current = 260;
-        letterM.current = -20;
-        letterN.current = -40;
-        moveRightMref.current = 0;
-      }
+      // if (width <= 480) {
+      //   rotateNref.current = 260;
+      //   letterM.current = -20;
+      //   letterN.current = -40;
+      //   moveRightMref.current = 0;
+      // }
     };
 
     const init = async () => {
@@ -79,22 +83,8 @@ const Initials = () => {
 
   const rawMoveDownN = useTransform(
     scrollY,
-    [
-      0,
-      ready
-        ? currentPosLetters.landingN -
-          currentPosLetters.fallingN -
-          letterN.current
-        : 1,
-    ],
-    [
-      0,
-      ready
-        ? currentPosLetters.landingN -
-          currentPosLetters.fallingN -
-          letterN.current
-        : 0,
-    ],
+    [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 1],
+    [0, ready ? currentPosLetters.landingN - currentPosLetters.fallingN : 0],
   );
   const rawRotateN = useTransform(
     scrollY,
@@ -120,22 +110,8 @@ const Initials = () => {
   });
   const rawMoveDownM = useTransform(
     scrollY,
-    [
-      0,
-      ready
-        ? currentPosLetters.landingM -
-          currentPosLetters.fallingM -
-          letterM.current
-        : 1,
-    ],
-    [
-      0,
-      ready
-        ? currentPosLetters.landingM -
-          currentPosLetters.fallingM -
-          letterM.current
-        : 0,
-    ],
+    [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 1],
+    [0, ready ? currentPosLetters.landingM - currentPosLetters.fallingM : 0],
   );
   const rawRotateM = useTransform(
     scrollY,
