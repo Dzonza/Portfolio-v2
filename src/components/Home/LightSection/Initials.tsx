@@ -1,5 +1,5 @@
 import { motion, useScroll, useSpring, useTransform } from 'motion/react';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import useResize from '../../../CustomHooks/Resize';
 import { useLetterPosition } from '../../../CustomHooks/UseLetterPoisition';
 
@@ -7,14 +7,19 @@ const Initials = () => {
   const { scrollY } = useScroll();
   const { landingMref, landingNref } = useLetterPosition();
   const { width } = useResize();
+  const [currentPosLetters, setCurrentPosLetters] = useState({
+    fallingN: 0,
+    fallingM: 0,
+    landingN: 0,
+    landingM: 0,
+  });
   const letterM = useRef<number>(80);
   const letterN = useRef<number>(80);
   const mRefLetter = useRef<HTMLImageElement | null>(null);
   const nRefLetter = useRef<HTMLImageElement | null>(null);
   const rotateNref = useRef<number>(174);
   const moveRightMref = useRef<number>(40);
-  const distanceN = useRef(0);
-  const distanceM = useRef(0);
+
   useLayoutEffect(() => {
     const measure = () => {
       if (
@@ -34,9 +39,12 @@ const Initials = () => {
       const landingM =
         landingMref.current.getBoundingClientRect().top + window.scrollY;
 
-      distanceN.current = landingN - fallingN;
-      distanceM.current = landingM - fallingM;
-
+      setCurrentPosLetters({
+        fallingN,
+        fallingM,
+        landingN,
+        landingM,
+      });
       if (width > 1024) {
         letterM.current = 25;
         letterN.current = 40;
@@ -68,15 +76,25 @@ const Initials = () => {
 
   const rawMoveDownN = useTransform(
     scrollY,
-    [0, distanceN.current - letterN.current],
-    [0, distanceN.current - letterN.current],
+    [
+      0,
+      currentPosLetters.landingN - currentPosLetters.fallingN - letterN.current,
+    ],
+    [
+      0,
+      currentPosLetters.landingN - currentPosLetters.fallingN - letterN.current,
+    ],
   );
   const rawRotateN = useTransform(
     scrollY,
-    [0, distanceN.current],
+    [0, currentPosLetters.landingN - currentPosLetters.fallingN],
     ['0', `${rotateNref.current}deg`],
   );
-  const rawMoveRightN = useTransform(scrollY, [0, distanceN.current], [0, 20]);
+  const rawMoveRightN = useTransform(
+    scrollY,
+    [0, currentPosLetters.landingN - currentPosLetters.fallingN],
+    [0, 20],
+  );
 
   const moveRightN = useSpring(rawMoveRightN, {
     mass: 0.1,
@@ -91,17 +109,23 @@ const Initials = () => {
   });
   const rawMoveDownM = useTransform(
     scrollY,
-    [0, distanceM.current - letterM.current],
-    [0, distanceM.current - letterM.current],
+    [
+      0,
+      currentPosLetters.landingM - currentPosLetters.fallingM - letterM.current,
+    ],
+    [
+      0,
+      currentPosLetters.landingM - currentPosLetters.fallingM - letterM.current,
+    ],
   );
   const rawRotateM = useTransform(
     scrollY,
-    [0, distanceM.current],
+    [0, currentPosLetters.landingM - currentPosLetters.fallingM],
     ['0', '385deg'],
   );
   const rawMoveRightM = useTransform(
     scrollY,
-    [0, distanceM.current],
+    [0, currentPosLetters.landingM - currentPosLetters.fallingM],
     [0, moveRightMref.current],
   );
 
