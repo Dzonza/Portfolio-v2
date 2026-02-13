@@ -29,7 +29,7 @@ const AboutContent: FC = () => {
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();
-  const aboutLettersInView = useInView(aboutLettersRef, { amount: 0.5 });
+  const aboutLettersInView = useInView(aboutLettersRef, { amount: 0.2 });
   const handleLottieWaves = useCallback(
     (lottie: DotLottie | null) => {
       wavesRef.current = lottie;
@@ -87,7 +87,7 @@ const AboutContent: FC = () => {
           animate={aboutLettersInView ? { scale: 1 } : { scale: 0 }}
           transition={
             aboutLettersInView
-              ? { type: 'spring', mass: 1, stiffness: 150 }
+              ? { type: 'spring', mass: 1, stiffness: 150, damping: 15 }
               : { duration: 0.3, ease: 'easeOut' }
           }
           src="images/about-n-letter.png"
@@ -104,7 +104,13 @@ const AboutContent: FC = () => {
           animate={aboutLettersInView ? { scale: 1 } : { scale: 0 }}
           transition={
             aboutLettersInView
-              ? { type: 'spring', mass: 1, stiffness: 150, delay: 0.2 }
+              ? {
+                  type: 'spring',
+                  mass: 1,
+                  stiffness: 150,
+                  damping: 15,
+                  delay: 0.2,
+                }
               : { duration: 0.3, ease: 'easeOut' }
           }
           src="images/about-m-letter.png"
