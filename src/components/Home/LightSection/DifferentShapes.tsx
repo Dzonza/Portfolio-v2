@@ -36,7 +36,7 @@ const DifferentShapes = () => {
         style={{ scale: rawScrollDown }}
         src="/images/m-letter-cover.png"
         alt="small blob shape"
-        className=" w-52 xs:w-auto absolute top-[188px] s:top-52 md:top-48  left-20 md:left-28 "
+        className=" w-48 ss:w-auto absolute top-[188px] s:top-52 md:top-48  left-20 md:left-28 "
       />
       <motion.img
         style={{ scale: rawScrollDown }}
@@ -46,7 +46,7 @@ const DifferentShapes = () => {
             : '/images/n-letter-cover-rotated.png'
         }
         alt="small blob shape"
-        className=" w-52 xs:w-auto absolute  bottom-52  right-[100px] s:right-10 sm:right-28 md:right-36"
+        className=" w-48 ss:w-auto absolute  bottom-52  right-[100px] s:right-10 sm:right-28 md:right-36"
       />
     </>
   );

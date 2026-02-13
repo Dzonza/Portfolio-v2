@@ -25,10 +25,9 @@ const About = () => {
       <div className="flex flex-col" ref={marqueContainerRef}>
         <div className="py-5">
           <Marquee
-            className="bg-[#FBFBFB]"
             gradient
             gradientColor="#fbfbfb"
-            gradientWidth="50px"
+            gradientWidth={width < 640 ? '0px' : '30px'}
             play={isInView && !isClicked ? true : false}
             speed={30}
           >
@@ -44,7 +43,7 @@ const About = () => {
           <Marquee
             gradient
             gradientColor="#151419"
-            gradientWidth="50px"
+            gradientWidth={width < 640 ? '0px' : '30px'}
             direction="right"
             play={isInView && !isClicked ? true : false}
           >
@@ -72,7 +71,7 @@ const About = () => {
               textColor="#151419"
             />
           </Marquee>
-          <p className=" relative font-[bauhaus] text-[#fbfbfb] s:leading-normal  m:leading-[1.2]  text-[38px] xs:text-[45px] m:text-[60px] sm:text-[70px] md:text-[90px] text-center">
+          <p className=" relative font-[bauhaus] text-[#fbfbfb] s:leading-normal  m:leading-[1.2]  text-[38px]  m:text-[60px] sm:text-[70px] md:text-[90px] text-center">
             Lets build something {width <= 560 ? '' : 'together'}
           </p>
         </div>

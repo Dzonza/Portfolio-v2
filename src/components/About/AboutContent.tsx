@@ -11,7 +11,6 @@ import {
 } from 'react';
 import Marquee from 'react-fast-marquee';
 import useResize from '../../CustomHooks/Resize';
-import { useLetterPosition } from '../../CustomHooks/UseLetterPoisition';
 import { NavLinks } from '../store/BurgerMenuNavContext';
 import AboutImagesContainer from './AboutImagesContainer';
 import LangImageContainer from './LangImageContainer';
@@ -19,6 +18,7 @@ import LangImageContainer from './LangImageContainer';
 const AboutContent: FC = () => {
   const aboutContectRef = useRef<HTMLElement | null>(null);
   const langContainerRef = useRef<HTMLDivElement | null>(null);
+  const aboutLettersRef = useRef<HTMLDivElement | null>(null);
   const langInView = useInView(langContainerRef, {
     amount: 0,
     initial: false,
@@ -26,11 +26,10 @@ const AboutContent: FC = () => {
   const wavesRef = useRef<DotLottie | null>(null);
   const tirangleRef = useRef<DotLottie | null>(null);
   const isInView = useInView(aboutContectRef, { amount: 0, initial: false });
-  const { landingMref, landingNref } = useLetterPosition();
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();
-
+  const aboutLettersInView = useInView(aboutLettersRef, { amount: 0.5 });
   const handleLottieWaves = useCallback(
     (lottie: DotLottie | null) => {
       wavesRef.current = lottie;
@@ -67,30 +66,55 @@ const AboutContent: FC = () => {
       className="flex flex-col-reverse lg:flex-row gap-5"
       ref={aboutContectRef}
     >
-      <div className="w-full lg:w-[45%] h-[400px] xs:h-[450px] s:h-[350px] relative ">
+      <div
+        className="w-full lg:w-[45%] h-[400px] xs:h-[450px] s:h-[350px] relative "
+        ref={aboutLettersRef}
+      >
         <DotLottieReact
           src="lottie/waves.lottie"
-          className="absolute w-56  top-[35%] xs:top-[25%] m:top-[10%] sm:top-auto left-[-10%] m:left-0"
+          className="absolute w-48 ss:w-56  top-[35%]  m:top-[10%] sm:top-auto left-[-10%] m:left-0"
           dotLottieRefCallback={handleLottieWaves}
           loop
         />
         <DotLottieReact
           src="lottie/triangle.lottie"
-          className="absolute w-44 bottom-[-16%] xs:bottom-[-12%] m:bottom-0 md:bottom-10 lg:bottom-0 right-[-10%] xs:right-0 m:right-[10%] sm:right-[20%] md:right-[25%] lg:right-0"
+          className="absolute w-36 ss:w-44 bottom-[-16%] xs:bottom-[-12%] m:bottom-0 md:bottom-10 lg:bottom-0 right-[-10%] xs:right-0 m:right-[10%] sm:right-[20%] md:right-[25%] lg:right-0"
           loop
           dotLottieRefCallback={handleLottieTriangle}
         />
+        <motion.img
+          initial={{ scale: 0 }}
+          animate={aboutLettersInView ? { scale: 1 } : { scale: 0 }}
+          transition={
+            aboutLettersInView
+              ? { type: 'spring', mass: 1, stiffness: 150 }
+              : { duration: 0.3, ease: 'easeOut' }
+          }
+          src="images/about-n-letter.png"
+          className=" w-52 ss:w-auto absolute right-12 s:right-2 sm:right-8 md:right-10  top-6 m:top-0 sm:top-1 md:top-6 z-20"
+          alt="letter n"
+        />
         <img
           src="images/subtract-n-letter.png"
-          className=" w-56 xs:w-auto absolute right-12 s:right-2 sm:right-8 md:right-10  top-10 m:top-2 sm:top-5 md:top-10"
+          className=" w-52 ss:w-auto absolute right-12 s:right-2 sm:right-8 md:right-10  top-10 m:top-2 sm:top-5 md:top-10"
           alt="n letter"
-          ref={landingNref}
+        />
+        <motion.img
+          initial={{ scale: 0 }}
+          animate={aboutLettersInView ? { scale: 1 } : { scale: 0 }}
+          transition={
+            aboutLettersInView
+              ? { type: 'spring', mass: 1, stiffness: 150, delay: 0.2 }
+              : { duration: 0.3, ease: 'easeOut' }
+          }
+          src="images/about-m-letter.png"
+          className="w-[215px] ss:w-auto absolute left-[60px] md:left-[75px]  -bottom-4 sm:bottom-4 md:bottom-9 z-20"
+          alt="letter m"
         />
         <img
           src="images/subtract-m-letter.png"
-          className=" w-60 xs:w-auto absolute left-[60px] md:left-[75px] -rotate-2 -bottom-8 sm:bottom-0 md:bottom-5"
+          className="w-[215px] ss:w-auto absolute left-[60px] md:left-[75px]  -bottom-8 sm:bottom-0 md:bottom-5"
           alt="m letter"
-          ref={landingMref}
         />
       </div>
       <div

@@ -56,8 +56,8 @@ const Contact = () => {
           {width > 1024 && (
             <div className="w-[1px] h-[250px] bg-[#1514191c] "></div>
           )}
-          <div className="lg:w-1/2 w-full  h-[270px]  flex justify-center">
-            <article className=" w-[300px] xs:w-[400px] relative">
+          <div className="lg:w-1/2 w-full  h-[220px] ss:h-[270px]  flex justify-center">
+            <article className=" w-[300px] ss:w-[400px] relative">
               <ContactLetterN isInView={isInView} />
               <ContactLetterM isInView={isInView} />
             </article>

@@ -1,12 +1,12 @@
-import { useInView } from 'motion/react';
+import { motion, useInView } from 'motion/react';
 import { useRef, useState } from 'react';
 import useResize from '../../../CustomHooks/Resize';
+import './darkSection.css';
 import LanguageBox from './LanguageBox';
 import Navigation from './Navigation/Navigation';
 import PulsingCircles from './PulsingCircles';
 import Sphere from './Sphere';
 import StaticImages from './StaticImages';
-import './darkSection.css';
 const DarkSection = () => {
   const darkSectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(darkSectionRef, { amount: 0 });
@@ -94,6 +94,30 @@ const DarkSection = () => {
         ></div>
       </div>
       <Sphere />
+      <div className="absolute top-0 left-1/2 lg:top-1/2 lg:left-0 -translate-y-1/2 -translate-x-1/2   ">
+        <motion.div
+          className="w-[45px] h-[45px] xs:w-[85px] xs:h-[85px] bg-[#151419] rounded-[50%]"
+          style={{
+            boxShadow: `
+        inset 0 0 50px #a855f766,
+         inset 0 0 90px #6d28d9aa,
+        inset 0 0 40px #ffffff10
+      `,
+            filter: 'blur(0.4px)',
+          }}
+          whileInView={{
+            scale: [1.05, 1.15, 1.05],
+            opacity: [1, 0.85, 1],
+            rotate: [0, 2, 0, -2, 0],
+          }}
+          viewport={{ amount: 0 }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        ></motion.div>
+      </div>
     </article>
   );
 };
