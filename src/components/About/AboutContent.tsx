@@ -29,7 +29,7 @@ const AboutContent: FC = () => {
   const { isClicked } = useContext(NavLinks);
   const [playPulse, setPlayPulse] = useState(false);
   const { width } = useResize();
-  const aboutLettersInView = useInView(aboutLettersRef, { amount: 0.2 });
+  const aboutLettersInView = useInView(aboutLettersRef, { amount: 0.5 });
   const handleLottieWaves = useCallback(
     (lottie: DotLottie | null) => {
       wavesRef.current = lottie;
@@ -67,7 +67,7 @@ const AboutContent: FC = () => {
       ref={aboutContectRef}
     >
       <div
-        className="w-full lg:w-[45%] h-[400px] xs:h-[450px] s:h-[350px] relative "
+        className="w-full lg:w-[45%] h-[370px] xs:h-[450px] s:h-[350px] relative "
         ref={aboutLettersRef}
       >
         <DotLottieReact
@@ -78,7 +78,7 @@ const AboutContent: FC = () => {
         />
         <DotLottieReact
           src="lottie/triangle.lottie"
-          className="absolute w-36 ss:w-44 bottom-[-16%] xs:bottom-[-12%] m:bottom-0 md:bottom-10 lg:bottom-0 right-[-10%] xs:right-0 m:right-[10%] sm:right-[20%] md:right-[25%] lg:right-0"
+          className="absolute w-36 ss:w-44 bottom-[-16%] xs:bottom-[-12%] m:bottom-0 md:bottom-10 lg:bottom-0 right-[-5%] xs:right-0 m:right-[10%] sm:right-[20%] md:right-[25%] lg:right-0"
           loop
           dotLottieRefCallback={handleLottieTriangle}
         />
@@ -88,7 +88,7 @@ const AboutContent: FC = () => {
           transition={
             aboutLettersInView
               ? { type: 'spring', mass: 1, stiffness: 150, damping: 15 }
-              : { duration: 0.3, ease: 'easeOut' }
+              : { duration: 0.5, ease: 'easeOut' }
           }
           src="images/about-n-letter.png"
           className=" w-52 ss:w-auto absolute right-12 s:right-2 sm:right-8 md:right-10  top-6 m:top-0 sm:top-1 md:top-6 z-20"
@@ -111,7 +111,7 @@ const AboutContent: FC = () => {
                   damping: 15,
                   delay: 0.2,
                 }
-              : { duration: 0.3, ease: 'easeOut' }
+              : { duration: 0.5, ease: 'easeOut' }
           }
           src="images/about-m-letter.png"
           className="w-[215px] ss:w-auto absolute left-[60px] md:left-[75px]  -bottom-4 sm:bottom-4 md:bottom-9 z-20"
@@ -138,17 +138,17 @@ const AboutContent: FC = () => {
           }}
           className="text-[14px] xs:text-[17px] s:text-[20px] text-[#FBFBFB] text-justify font-extralight"
         >
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate
-          magnam alias earum fuga consequuntur eum, cumque a laboriosam sequi
-          optio beatae sint adipisci ipsum nihil. Dolore qui saepe temporibus
-          praesentium. Voluptates similique aliquid pariatur enim facere
-          incidunt officia vero ducimus consequatur quaerat, corporis sapiente
-          eligendi id? At minima debitis, fuga quos suscipit iste, quaerat totam
-          odio natus cum, mollitia dicta. Perferendis, sapiente architecto vel,
-          vero deleniti nesciunt alias tempore ad commodi exercitationem
-          eligendi id? At minima debitis, fuga quos suscipit iste, quaerat totam
-          odio natus cum, mollitia dicta. Perferendis, sapiente architecto vel,
-          vero deleniti nesciunt alias tempore ad commodi exercitationem
+          I am a passionate web developer with a strong foundation in React,
+          Vue.js, TypeScript, HTML, and CSS. I also use Sass and Tailwind CSS
+          for efficient and modern styling. As a frontend development teacher, I
+          enjoy sharing my knowledge while continuously learning and growing
+          alongside the evolving tech landscape. I specialize in creating
+          dynamic and interactive user interfaces that enhance user experiences.
+          Eager to begin my professional journey in web development, I bring
+          creativity, dedication, and a strong eye for detail to every project.
+          Constantly staying updated with industry trends, I strive to innovate
+          and deliver impactful, user-friendly solutions. Let’s connect and
+          bring your ideas to life!
         </motion.p>
         {width <= 480 && (
           <Marquee

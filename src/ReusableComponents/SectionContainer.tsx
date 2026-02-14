@@ -39,7 +39,7 @@ const SectionContainer: FC<ContainerData> = ({
   return (
     <section
       id={sectionId}
-      className={`px-0  s:px-2 m:px-5 sm:px-10 lg:px-12 ${width <= 560 && title === 'Projects' ? 'pt-[120px]' : 'pt-20'}  lg:pt-32 flex flex-col gap-0 sm:gap-5  text-[36px]  max-w-[1600px] m-auto overflow-hidden ${title === 'Projects' && 'relative'}`}
+      className={`px-0  s:px-2 m:px-5 sm:px-10 lg:px-12 ${width <= 560 && title === 'Projects' ? 'pt-[120px]' : 'pt-20'}  lg:pt-32 flex flex-col  ${title === 'About' ? 'gap-0' : width > 640 ? 'gap-5' : 'gap-0'}  text-[36px]  max-w-[1600px] m-auto overflow-hidden ${title === 'Projects' && 'relative'}`}
       ref={projectsRef}
     >
       {titleStyle ? (
