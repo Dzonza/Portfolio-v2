@@ -25,7 +25,7 @@ const DifferentShapes = () => {
       <img
         src="/images/line-circle.png"
         alt="small blob shape"
-        className="absolute w-[75px] xs:w-[90px] md:w-auto right-[75%] xs:right-[15%] s:right-[45%] rotate-45 xs:-rotate-[210deg] s:-rotate-[-60deg] top-[20%] xs:top-[8%] s:top-[5%] md:top-[20%] lg:right-[25%] lg:top-72 lg:rotate-0"
+        className="absolute w-[75px] ss:w-[90px] md:w-auto right-[75%] xs:right-[15%] s:right-[45%] rotate-45 xs:-rotate-[210deg] s:-rotate-[-60deg] top-[20%] xs:top-[8%] s:top-[5%] md:top-[20%] lg:right-[25%] lg:top-72 lg:rotate-0"
       />
       <img
         src="/images/two-small-shapes.png"

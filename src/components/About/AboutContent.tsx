@@ -67,7 +67,7 @@ const AboutContent: FC = () => {
       ref={aboutContectRef}
     >
       <div
-        className="w-full lg:w-[45%] h-[370px] xs:h-[450px] s:h-[350px] relative "
+        className="w-full lg:w-[45%] h-[370px] ss:h-[450px] s:h-[350px] relative "
         ref={aboutLettersRef}
       >
         <DotLottieReact
