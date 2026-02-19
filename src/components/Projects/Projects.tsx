@@ -102,14 +102,14 @@ const Projects = () => {
           logo="/images/infinite-loop-logo.png"
           images={infiniteLoopData}
           languages={infiniteLoopLangImages}
-          transferTo="https://www.infinite-loop.site/"
+          transferTo="https://infinite-loop-school.vercel.app/"
         />
         <Project
           title="GrillPop"
           logo="/images/grillpop-logo.png"
           images={grillPopData}
           languages={grillPopLangImages}
-          transferTo="https://grillpop.shop/"
+          transferTo="https://grill-pop.vercel.app/"
         />
         <Project
           title="gooFactory"
