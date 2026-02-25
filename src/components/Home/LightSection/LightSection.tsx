@@ -45,7 +45,7 @@ const LightSection = () => {
         offset={width > 768 ? 100 : 50}
       >
         <DotLottieReact
-          className="absolute bottom-5 lg:bottom-0 -left-3 s:left-2 m:left-0 h-16 s:h-20 s:-translate-x-1/3 cursor-pointer"
+          className="absolute bottom-5 lg:bottom-0 left-6 s:left-2 m:left-0  w-28 s:w-40 -translate-x-1/3 cursor-pointer"
           src="/lottie/ScrollDown.lottie"
           dotLottieRefCallback={handleLottieAnimation}
           autoplay={!!isInView}
